@@ -10,8 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/order")
 public class JamesServlet  extends HttpServlet{
+	//重写doget方法
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.getWriter().write("success...");
+		System.out.println(Thread.currentThread()+"start.....");
+
+		try {
+			buyCards();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		resp.getWriter().write("order sucesful....");
+		System.out.println(Thread.currentThread()+" end..........");
+	}
+
+	public void buyCards() throws InterruptedException{
+		System.out.println(Thread.currentThread()+".............");
+		Thread.sleep(5000);//模拟业务操作
 	}
 }
